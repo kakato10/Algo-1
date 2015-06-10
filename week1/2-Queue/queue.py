@@ -34,11 +34,3 @@ class Queue():
 
     def peek(self):
         return self.head.get_value()
-
-queue = Queue()
-queue.push(4)
-print("The first element of the queue is: ", queue.peek())
-queue.push(2)
-print("The size of the queue is: ", queue.get_size())
-print("The popped value from the queue is: ", queue.pop().get_value())
-print("The queue size after pop is:", queue.get_size())
