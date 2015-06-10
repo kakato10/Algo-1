@@ -31,11 +31,3 @@ class Stack(object):
 
     def get_size(self):
         return self.queue.get_size()
-
-stack = Stack()
-stack.push(4)
-print("The first element of the queue is: ", stack.peek())
-stack.push(2)
-print("The size of the queue is: ", stack.get_size())
-print("The popped value from the queue is: ", stack.pop())
-print("The queue size after pop is:", stack.get_size())
