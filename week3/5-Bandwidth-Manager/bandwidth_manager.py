@@ -48,12 +48,18 @@ class BandwidthManager():
             i = parent_index
             parent_index = int((i - 1) / 2)
             parent_priority = self.heap[parent_index].get_priority()
-# implement date comparison here and in self.send
-        # while not i == 0 and package_priority == parent_priority and package.get_date() < :
+        package_date = package.get_date()
+        parent_date = self.heap[parent_index].get_date()
+        while not i == 0 and package_date < parent_date and package_priority == parent_priority:
+            self.swap(i, parent_index)
+            i = parent_index
+            parent_index = int((i - 1) / 2)
+            parent_priority = self.heap[parent_index].get_priority()
+            parent_date = self.heap[parent_index].get_date()
 
     def send(self):
         if len(self.heap) == 0:
-            print("All packages were sent")
+            print("\>Nothing to send!")
             return False
         self.swap(0, len(self.heap) - 1)
         root = self.heap[-1]
@@ -69,14 +75,14 @@ class BandwidthManager():
                     compare_to = right_child
             else:
                 compare_to = left_child
-            if self.heap[item_index].get_priority() < self.heap[compare_to].get_priority():
+            if self.heap[item_index].get_priority() <= self.heap[compare_to].get_priority():
                 self.swap(item_index, compare_to)
             else:
                 break
             item_index = compare_to
             left_child = item_index * 2 + 1
             right_child = item_index * 2 + 2
-        print(root.get_payload())
+        print("\>" + root.get_payload())
 
     def swap(self, index1, index2):
         temp = self.heap[index1]
@@ -86,8 +92,9 @@ class BandwidthManager():
 
 def main():
     manager = BandwidthManager()
-    while True:
-        command = input("Enter command> ")
+    counter = int(input())
+    while counter > 0:
+        command = input("")
         if command == "send":
             manager.send()
         elif command[:3] == "rcv":
@@ -96,5 +103,7 @@ def main():
             manager.recieve(package)
         else:
             break
+        counter -= 1
+
 if __name__ == '__main__':
     main()
