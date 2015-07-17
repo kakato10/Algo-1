@@ -39,13 +39,17 @@ class MinMaxHeap():
                             result = False
                             break
             i += 1
-        print(result)
+        if result:
+            print("YES")
+        else:
+            print("NO")
 
     def get_next_level_index(self, i):
         return i * 2 + 1
 
 
 def main():
+    size = input()
     array = input().split(" ")
     array = list(map(int, array))
     checker = MinMaxHeap()
